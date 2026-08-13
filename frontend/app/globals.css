@@ -1,0 +1,442 @@
+@import "tailwindcss";
+
+/* =========================================================
+   MEAN MEDIA AI — DESIGN SYSTEM
+   ========================================================= */
+
+:root {
+  --mean-blue: #4f59c3;
+  --mean-blue-light: #6872df;
+  --mean-blue-dark: #39439e;
+
+  --mean-black: #070918;
+  --mean-black-soft: #0d1020;
+
+  --mean-white: #f5f5f0;
+  --mean-muted: #9297ad;
+
+  --mean-grid: #20264a;
+  --mean-border: rgba(245, 245, 240, 0.12);
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--mean-black);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--mean-black);
+  color: var(--mean-white);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  overflow-x: hidden;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+/* =========================================================
+   MEAN MEDIA GRID
+   ========================================================= */
+
+.mean-grid {
+  background-color: var(--mean-black);
+
+  background-image:
+    linear-gradient(
+      rgba(79, 89, 195, 0.08) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(79, 89, 195, 0.08) 1px,
+      transparent 1px
+    );
+
+  background-size: 40px 40px;
+}
+
+/* =========================================================
+   SPLASH SCREEN
+   ========================================================= */
+
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--mean-black);
+
+  overflow: hidden;
+
+  animation: splashAppear 0.5s ease-out;
+}
+
+.splash-screen-exit {
+  animation: splashExit 0.6s ease-in-out forwards;
+}
+
+/* Background grid */
+
+.splash-grid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(79, 89, 195, 0.08) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(79, 89, 195, 0.08) 1px,
+      transparent 1px
+    );
+
+  background-size: 48px 48px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 25%,
+    black 75%,
+    transparent
+  );
+
+  opacity: 0.6;
+}
+
+/* Slight scanning line */
+
+.splash-grid::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  height: 1px;
+
+  background: var(--mean-blue);
+
+  box-shadow:
+    0 0 20px var(--mean-blue),
+    0 0 50px var(--mean-blue);
+
+  animation: scanLine 2.4s linear infinite;
+}
+
+/* Main content */
+
+.splash-content {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+/* Logo */
+
+.logo-container {
+  position: relative;
+
+  width: 150px;
+  height: 150px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation:
+    logoFloat 2s ease-in-out infinite,
+    logoBlink 1.4s steps(2, end) infinite;
+
+  filter:
+    drop-shadow(0 0 20px rgba(79, 89, 195, 0.35));
+}
+
+.splash-logo {
+  width: 150px;
+  height: 150px;
+
+  object-fit: contain;
+
+  border-radius: 28px;
+}
+
+/* Brand */
+
+.splash-brand {
+  margin-top: 28px;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  letter-spacing: 0.28em;
+
+  color: var(--mean-white);
+}
+
+/* Status */
+
+.splash-status {
+  margin-top: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 10px;
+
+  letter-spacing: 0.12em;
+
+  color: var(--mean-muted);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: var(--mean-blue);
+
+  box-shadow:
+    0 0 8px var(--mean-blue),
+    0 0 16px rgba(79, 89, 195, 0.6);
+
+  animation: statusBlink 0.8s steps(2, end) infinite;
+}
+
+/* Loader */
+
+.splash-loader {
+  width: 220px;
+  height: 2px;
+
+  margin-top: 22px;
+
+  background: rgba(245, 245, 240, 0.1);
+
+  overflow: hidden;
+}
+
+.splash-loader-bar {
+  width: 0%;
+  height: 100%;
+
+  background: var(--mean-blue);
+
+  box-shadow:
+    0 0 8px var(--mean-blue),
+    0 0 20px rgba(79, 89, 195, 0.7);
+
+  animation: loadingBar 2.2s cubic-bezier(
+    0.65,
+    0,
+    0.35,
+    1
+  ) forwards;
+}
+
+/* =========================================================
+   SPLASH CORNERS
+   ========================================================= */
+
+.splash-corner {
+  position: absolute;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 0.12em;
+
+  color: rgba(245, 245, 240, 0.35);
+}
+
+.splash-corner-tl {
+  top: 24px;
+  left: 28px;
+}
+
+.splash-corner-tr {
+  top: 24px;
+  right: 28px;
+}
+
+.splash-corner-bl {
+  bottom: 24px;
+  left: 28px;
+}
+
+.splash-corner-br {
+  bottom: 24px;
+  right: 28px;
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes splashAppear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes splashExit {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes logoBlink {
+  0%,
+  35% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 0.35;
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 0.45;
+  }
+
+  85% {
+    opacity: 1;
+  }
+}
+
+@keyframes logoFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes statusBlink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes loadingBar {
+  0% {
+    width: 0%;
+  }
+
+  40% {
+    width: 45%;
+  }
+
+  70% {
+    width: 72%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes scanLine {
+  0% {
+    top: -5%;
+  }
+
+  100% {
+    top: 105%;
+  }
+}
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background: var(--mean-blue);
+  color: white;
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--mean-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mean-blue);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mean-blue-light);
+}
